@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Information</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <h1>Enter Student Information</h1>
+    <form id="student-form">
+        <input type="text" id="firstname" placeholder="Firstname">
+        <input type="text" id="lastname" placeholder="Lastname">
+        <input type="text" id="age" placeholder="Age">
+        <input type="text" id="year" placeholder="Year">
+        <button type="submit">Submit</button>
+    </form>
+
+    <button id="showStudents">Show All Students</button>
+    <div id="container" class="container invisible">
+        <table>
+            <thead>
+                <tr>
+                    <th data-label="firstname">Firstname</th>
+                    <th data-label="lastname">Lastname</th>
+                    <th data-label="age">Age</th>
+                    <th data-label="year">Year</th>
+                </tr>
+            </thead>
+            <tbody id="studentsList">
+                <!-- Student rows will go here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
