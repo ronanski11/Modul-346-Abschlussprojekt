@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
       "year": document.getElementById("year").value
     };
 
-    fetch("http://localhost:8000/api.php", {
+    fetch("https://rc-modul-346.azurewebsites.net/api.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
     container.classList.remove("invisible");
     container.classList.add("visible");
     document.getElementById("showStudents").innerHTML = "Refresh";
-    fetch("http://localhost:8000/api.php", {
+    fetch("https://rc-modul-346.azurewebsites.net/api.php", {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
