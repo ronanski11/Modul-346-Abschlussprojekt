@@ -1,38 +1,40 @@
 <?php
 header("Content-Type: application/json");
 
-// Azure SQL Server Connection
 $servername = "r-modul-346-server.database.windows.net";
 $username = "ronanski11";
-$password = "LandesweitTier187";
+$password = "LandesweitTier187"; // Be cautious about storing sensitive data like passwords in your code.
 $dbname = "db_students";
 
 try {
     $conn = new PDO("sqlsrv:server=$servername;Database=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-  $data = json_decode(file_get_contents("php://input"), true);
-  $firstname = $data["firstname"];
-  $lastname = $data["lastname"];
-  $age = $data["age"];
-  $year = $data["year"];
+    // Read POST data for both conditions
+    $data = json_decode(file_get_contents("php://input"), true);
 
-  $sql = "INSERT INTO students (firstname, lastname, age, year) VALUES ('$firstname', '$lastname', '$age', '$year')";
-  $result = $conn->query($sql);
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && $data['getAllStudents'] === false) {
+        $firstname = $data["firstname"];
+        $lastname = $data["lastname"];
+        $age = $data["age"];
+        $year = $data["year"];
 
-  echo json_encode(["status" => $result ? "success" : "error"]);
-} elseif ($_SERVER["REQUEST_METHOD"] === "GET") {
-  $sql = "SELECT * FROM students";
-  $result = $conn->query($sql);
-  $students = [];
+        $sql = "INSERT INTO students (firstname, lastname, age, year) VALUES ('$firstname', '$lastname', '$age', '$year')";
+        $result = $conn->query($sql);
 
-  while ($row = $result->fetch_assoc()) {
-    $students[] = $row;
-  }
+        echo json_encode(["status" => $result ? "success" : "error"]);
+    } elseif ($_SERVER["REQUEST_METHOD"] === "POST" && $data['getAllStudents'] === true) {
+        $sql = "SELECT * FROM students";
+        $result = $conn->query($sql);
+        $students = [];
 
-  echo json_encode($students);
-}
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            $students[] = $row;
+        }
+
+        echo json_encode($students);
+    }
+
 } catch (PDOException $e) {
     die("Connection failed: " . $e->getMessage());
 }

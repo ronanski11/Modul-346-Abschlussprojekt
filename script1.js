@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", function() {
       "firstname": document.getElementById("firstname").value,
       "lastname": document.getElementById("lastname").value,
       "age": document.getElementById("age").value,
-      "year": document.getElementById("year").value
+      "year": document.getElementById("year").value,
+      "getAllStudents": false
     };
 
     fetch("/api.php", {
@@ -33,11 +34,15 @@ document.addEventListener("DOMContentLoaded", function() {
     container.classList.remove("invisible");
     container.classList.add("visible");
     document.getElementById("showStudents").innerHTML = "Refresh";
+
     fetch("/api.php", {
-      method: "GET",
+      method: "POST",
       headers: {
         "Content-Type": "application/json"
-      }
+      },
+      body: JSON.stringify({
+        getAllStudents: true
+      })
     })
     .then(response => response.json())
     .then(data => {
