@@ -5,7 +5,7 @@ header("Content-Type: application/json");
 $servername = "r-modul-346-server.database.windows.net";
 $username = "ronanski11";
 $password = "LandesweitTier187";
-$dbname = "students_db";
+$dbname = "db_students";
 
 try {
     $conn = new PDO("sqlsrv:server=$servername;Database=$dbname", $username, $password);
