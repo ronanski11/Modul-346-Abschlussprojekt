@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
     container.classList.add("visible");
     document.getElementById("showStudents").innerHTML = "Refresh";
     fetch("/api.php", {
-      method: "PATCH",
+      method: "GET",
       headers: {
         "Content-Type": "application/json"
       }
