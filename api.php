@@ -1,15 +1,15 @@
 <?php
 header("Content-Type: application/json");
-$servername = "mysql-container:3306";
-$username = "root";
-$password = "rootpassword";
+
+// Azure SQL Server Connection
+$servername = "r-modul-346-server.database.windows.net";
+$username = "ronanski11";
+$password = "LandesweitTier187";
 $dbname = "students_db";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
+try {
+    $conn = new PDO("sqlsrv:server=$servername;Database=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $data = json_decode(file_get_contents("php://input"), true);
@@ -33,6 +33,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
   echo json_encode($students);
 }
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}
 
-$conn->close();
+$conn = null;
 ?>
