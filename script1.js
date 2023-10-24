@@ -26,10 +26,10 @@ document.addEventListener("DOMContentLoaded", function() {
       successMessage.classList.remove("invisible")
       successMessage.classList.add("visible");
 
-        setTimeout(() => {
-    successMessage.classList.remove("visible");
-    successMessage.classList.add("invisible");
-  }, 3000);
+      setTimeout(() => {
+      successMessage.classList.remove("visible");
+      successMessage.classList.add("invisible");
+    }, 3000);
     })
     .catch(error => {
       console.error("Error:", error);
