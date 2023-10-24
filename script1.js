@@ -1,5 +1,3 @@
-var successMessage = document.getElementById("success-message");
-
 document.addEventListener("DOMContentLoaded", function() {
   // Event listener for form submission to add a new student
   const form = document.getElementById("student-form");
@@ -24,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
     .then(response => response.json())
     .then(data => {
       console.log("Success:", data);
+      const successMessage = document.getElementById("success-message");
       successMessage.classList.remove("invisible")
       successMessage.classList.add("visible");
 
