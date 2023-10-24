@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $result = $conn->query($sql);
 
   echo json_encode(["status" => $result ? "success" : "error"]);
-} elseif ($_SERVER["REQUEST_METHOD"] === "GET") {
+} elseif ($_SERVER["REQUEST_METHOD"] === "PATCH") {
   $sql = "SELECT * FROM students";
   $result = $conn->query($sql);
   $students = [];
